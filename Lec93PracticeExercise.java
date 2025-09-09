@@ -14,7 +14,7 @@ public class Lec93PracticeExercise {
 	public static void main(String[] args) {
 		//Lec-93 -> Calculate link count in the Page
 		//Lec-94 -> Limiting webdriver scope
-		//Lec-95 -> How to open links in Separete Tabs - Optimized solution
+		//Lec-95 -> How to open links in Separate Tabs - Optimized solution
 		//Lec-96 -> Getting the titled of child tabs with optimized while loop
 		
 		
