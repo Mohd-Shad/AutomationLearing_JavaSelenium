@@ -1,0 +1,82 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+public class VerifySystemDate {
+    public static void main(String[] args) {
+        // Step 1: Launch browser
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://your-application-url.com");
+
+        // Step 2: Fetch the displayed date from UI (example locator)
+        WebElement dateElement = driver.findElement(By.id("dateField")); 
+        String actualDateText = dateElement.getText().trim();
+        System.out.println("Date from UI: " + actualDateText);
+
+        // Step 3: Get system date/time in required format
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE | dd MMMM yyyy 'UTC' HH:mm", Locale.ENGLISH);
+        String expectedDate = now.format(formatter);
+
+        System.out.println("System Date: " + expectedDate);
+
+        // Step 4: Compare both
+        if (actualDateText.equals(expectedDate)) {
+            System.out.println("✅ Date verification passed");
+        } else {
+            System.out.println("❌ Date verification failed");
+            System.out.println("Expected: " + expectedDate);
+            System.out.println("Found: " + actualDateText);
+        }
+
+        driver.quit();
+    }
+}
+
+
+Automation Code (System Date in UTC)
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+public class VerifyUTCDate {
+    public static void main(String[] args) {
+        // Step 1: Launch browser
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://your-application-url.com");
+
+        // Step 2: Fetch the displayed date from UI (update locator as per your app)
+        WebElement dateElement = driver.findElement(By.id("dateField"));
+        String actualDateText = dateElement.getText().trim();
+        System.out.println("Date from UI: " + actualDateText);
+
+        // Step 3: Get system date/time in UTC
+        ZonedDateTime utcNow = ZonedDateTime.now(ZoneId.of("UTC"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE | dd MMMM yyyy 'UTC' HH:mm", Locale.ENGLISH);
+        String expectedDate = utcNow.format(formatter);
+
+        System.out.println("System UTC Date: " + expectedDate);
+
+        // Step 4: Compare UI date vs system UTC date
+        if (actualDateText.equals(expectedDate)) {
+            System.out.println("✅ Date verification passed");
+        } else {
+            System.out.println("❌ Date verification failed");
+            System.out.println("Expected: " + expectedDate);
+            System.out.println("Found: " + actualDateText);
+        }
+
+        driver.quit();
+    }
+}
