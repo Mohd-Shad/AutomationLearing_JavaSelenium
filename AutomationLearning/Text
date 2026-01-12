@@ -1,0 +1,102 @@
+What is the use of WebDriverManager.chromedriver().setup();
+
+-> The method WebDriverManager.chromedriver().setup(); is used to automatically download and configure the correct version of ChromeDriver for Selenium WebDriver tests in Java.
+
+🧠 Why It’s Useful:
+
+When you use Selenium with Chrome, you need a compatible version of ChromeDriver that matches the installed version of Google Chrome on your machine. Managing this manually is error-prone and tedious.
+
+WebDriverManager solves this by:
+
+Detecting the version of Chrome installed on your system.
+
+Downloading the matching version of ChromeDriver from the official source.
+
+Setting the system property webdriver.chrome.driver automatically.
+
+Ensuring cross-platform support (Windows, macOS, Linux).
+
+✅ What WebDriverManager.chromedriver().setup(); Does Behind the Scenes:
+
+Checks if Chrome is installed and which version it is.
+
+Checks if a compatible chromedriver binary is already downloaded.
+
+If not, downloads the correct version and caches it locally.
+
+Sets the path to the chromedriver binary in the webdriver.chrome.driver system property, so you don’t need to set it manually.
+
+🔁 Before vs After Using WebDriverManager
+🔴 Old Way (Manual):
+System.setProperty("webdriver.chrome.driver", "C:\\path\\to\\chromedriver.exe");
+WebDriver driver = new ChromeDriver();
+
+
+You have to manually download and keep updating the driver.
+
+It breaks if Chrome updates.
+
+✅ With WebDriverManager:
+WebDriverManager.chromedriver().setup();
+WebDriver driver = new ChromeDriver();
+
+
+Fully automatic.
+
+No need to manage driver files manually.
+
+📦 How to Add WebDriverManager to Your Project (Maven):
+
+If you're using Maven, include this in your pom.xml:
+
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.6.3</version> <!-- Check for latest version -->
+</dependency>
+
+🧪 Example Code:
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Example {
+    public static void main(String[] args) {
+        WebDriverManager.chromedriver().setup();  // Auto setup
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+        driver.quit();
+    }
+}
+
+
+=============================================================================
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Test {
+    public static void main(String[] args) {
+        // Automatically sets up the ChromeDriver binary
+        WebDriverManager.chromedriver().setup();
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+
+        // Do your testing...
+
+        driver.quit();
+    }
+}
+
+Explanation:
+WebDriverManager.chromedriver().setup();
+This downloads the appropriate ChromeDriver version and sets the system property for you.
+
+Then, new ChromeDriver(); initializes the driver.
+
+=================
+
+https://sites.google.com/chromium.org/driver/capabilities
