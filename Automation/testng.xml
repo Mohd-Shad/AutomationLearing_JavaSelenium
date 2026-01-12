@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All Test Suite">
+
+    <!-- Test Group: Power Market Prices -->
+    <test name="Power Market Prices Tests">
+        <parameter name="URL" value="https://seraopt-infield.serenticaglobal.com/dashboard/power-market-prices" />
+        <classes>
+            <class name="serentica.PowerMarketPrices">
+                <methods>
+                    <include name="verifyDifferentSection" />
+                </methods>
+                    </class>
+        </classes>
+    </test>
+
+    <!-- Test Group: General TestNG Flow -->
+    <test verbose="2" preserve-order="true" name="General TestNG Flow">
+        <classes>
+            <class name="serentica.TestNG" />
+        </classes>
+    </test>
+
+</suite>
